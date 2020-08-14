@@ -58,7 +58,6 @@ tk.Label(window, textvariable=p1_wins, fg="blue", font="Helvetica").grid(row=4, 
 tk.Label(window, textvariable=p2_wins, fg="red", font="Helvetica").grid(row=4, column=2)
 
 
-
 def on_button_click(button):  # this function updates the empty box to either an X or O depending on whose turn it is.  
     global btn_click
     global empty_spaces
