@@ -8,9 +8,11 @@ window.title("Tic-Tac-Toe")
 
 #  window.resizable(0, 0)
 
-empty_spaces = 0
-p1_wins = tk.IntVar(0)
+empty_spaces = 0  # this variable updates each time a player makes a move.  When empty_spaces == 9 we give a message for cat's game.  
+
+p1_wins = tk.IntVar(0)  # allows number of wins to be updated inside the tk.Label for number of wins
 p2_wins = tk.IntVar(0)
+
 
 btn_click = True
 
@@ -51,7 +53,13 @@ btn9 = tk.Button(window, text="", width=10, height=10, font="Helvetica", borderw
 btn9.grid(row=3, column=3)
 
 
-def on_button_click(button):
+tk.Label(window, textvariable=p1_wins, fg="blue", font="Helvetica").grid(row=4, column=1)  # keeps track of number of wins for each player
+
+tk.Label(window, textvariable=p2_wins, fg="red", font="Helvetica").grid(row=4, column=2)
+
+
+
+def on_button_click(button):  # this function updates the empty box to either an X or O depending on whose turn it is.  
     global btn_click
     global empty_spaces
     if btn_click is True and len(button["text"]) == 0:  # check whose turn it is and if string is empty
@@ -68,7 +76,7 @@ def on_button_click(button):
         check()
 
 
-def check():  # all the winning situations, also adds 1 to the winner's total score
+def check():  # all the winning situations, also adds 1 to the winner's total score unless the board ends in a cat's game.  
     global p1_wins
     global p2_wins
     if (btn1["text"] == "X") and (btn2["text"] == "X") and (btn3["text"] == "X"):
@@ -148,7 +156,7 @@ def check():  # all the winning situations, also adds 1 to the winner's total sc
         new_game()
 
 
-def reset_board():
+def reset_board():  # if players choose to play another game then this resets the board to all empty buttons.  
     global btn_click
     global empty_spaces
     btn_click = btn_click  # the player who lost starts next
@@ -180,11 +188,6 @@ def new_game():
         else:
             tk.messagebox.showinfo("Tie", "You tied!")
             window.quit()
-
-
-tk.Label(window, textvariable=p1_wins, fg="blue", font="Helvetica").grid(row=4, column=1)
-
-tk.Label(window, textvariable=p2_wins, fg="red", font="Helvetica").grid(row=4, column=2)
 
 
 window.mainloop()
